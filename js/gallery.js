@@ -74,7 +74,7 @@ images.forEach(image => {
   const galleryLink = document.createElement("a");
   galleryLink.classList.add("gallery-link");
   galleryLink.href = image.original;
-  galleryLink.setAttribute("target", "_blank"); // Відкриває посилання у новому вікні
+  galleryLink.setAttribute("target", "_blank"); 
 
   const galleryImage = document.createElement("img");
   galleryImage.classList.add("gallery-image");
@@ -89,11 +89,15 @@ images.forEach(image => {
 
 
 galleryContainer.addEventListener("click", function(event) {
-  event.preventDefault(); // Забороняємо стандартну дію посилання
+  event.preventDefault();
 
   const target = event.target;
-  if (target.tagName === "IMG") { // Перевіряємо, чи клікнуто саме на зображенні
-    const largeImageSrc = target.dataset.source; // Отримуємо посилання на велике зображення з data-атрибуту source
-    console.log("Посилання на велике зображення:", largeImageSrc);
-  }
+  if (target.tagName === "IMG") { 
+    const largeImageSrc = target.dataset.source; 
+    const instance = basicLightbox.create(`
+    <img src="${largeImageSrc}" width="1112" height="600">
+  `);
+
+  instance.show(); 
+}
 });
